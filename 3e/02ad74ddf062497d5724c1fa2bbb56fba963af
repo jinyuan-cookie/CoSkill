@@ -1,0 +1,21 @@
+README.md
+  s_b80e137fbcf46c::t_3bc72f3281201f 13-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "3e02ad74ddf062497d5724c1fa2bbb56fba963af",
+  "prompts": {},
+  "sessions": {
+    "s_b80e137fbcf46c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05b97-0427-7502-8a43-fae47d612b9f",
+        "model": "unknown"
+      },
+      "human_author": "jinyuan-cookie <1477759391@qq.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
