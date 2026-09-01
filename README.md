@@ -10,6 +10,10 @@ and separate Python or Conda environments are recommended for the two tasks.
 
 ![CoSkill framework with joint reasoning and meta-skill reinforcement learning](assets/coskill_framework.png)
 
+## Experimental Results
+
+![CoSkill training curves and training efficiency on ALFWorld and WebShop](assets/coskill_training_results.png)
+
 ## 1. Hierarchical Skill Banks
 
 `initial_skill_bank` collects task skills and their linked step skills. The
@@ -111,10 +115,6 @@ bash examples_coskill/run_webshop_coskill.sh
 Model, dataset, embedding model, and output paths can be overridden with
 environment variables. Run either training launcher with `--help` to inspect
 its main settings.
-
-## 4. Experimental Results
-
-![CoSkill training curves and training efficiency on ALFWorld and WebShop](assets/coskill_training_results.png)
 
 ## Acknowledgements
 
