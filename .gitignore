@@ -1,0 +1,29 @@
+/checkpoints/
+/docker/
+/docs/
+/examples/
+/memory_data/
+/RetroAgent-main/
+/skill_generation/
+/SkillRL_origin/
+/swanlog/
+/models/
+/outputs/
+/train_sft/
+/env.sh
+/2603.28716v1.pdf
+/README_old.md
+/run_alfworld_skills_management.log
+*.whl
+.DS_Store
+
+# Generated initial Skill Bank artifacts
+/initial_skill_bank/logs/
+
+# Weights & Biases local run artifacts
+/wandb/
+
+# Python cache/build artifacts
+**/__pycache__/
+*.py[cod]
+*.egg-info/
