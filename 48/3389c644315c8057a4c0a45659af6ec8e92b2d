@@ -1,0 +1,25 @@
+.gitignore
+  s_b80e137fbcf46c::t_787b6642e387ce 1-29
+README.md
+  s_b80e137fbcf46c::t_c23e8429f1d0e9 1-109
+  s_b80e137fbcf46c::t_72ccf7a94d1c44 110-112
+  s_b80e137fbcf46c::t_3a271845b9cfe8 113-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "483389c644315c8057a4c0a45659af6ec8e92b2d",
+  "prompts": {},
+  "sessions": {
+    "s_b80e137fbcf46c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05b97-0427-7502-8a43-fae47d612b9f",
+        "model": "unknown"
+      },
+      "human_author": "jinyuan-cookie <1477759391@qq.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
