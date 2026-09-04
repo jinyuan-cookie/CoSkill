@@ -127,3 +127,57 @@ CoSkill was developed with reference to the following open-source projects:
 
 We thank their authors and contributors for making their work publicly
 available.
+
+## 4. Architecture and Training Flow
+
+CoSkill separates task execution from skill evolution while allowing both roles
+to share the same actor model:
+
+```text
+Skill Bank -> embedding retrieval -> Reasoning Agent -> environment
+                                      |
+                                      v
+                                Skill Agent edit
+                                      |
+                         private overlay + meta-attempts
+                                      |
+                                      v
+                    validated bundle promotion / rejection
+```
+
+- At reset, CoSkill retrieves task-level skills; in `task_step` mode, each
+  subsequent observation retrieves step skills only from the selected task
+  skill's children.
+- The Skill Agent proposes `INSERT`, `UPDATE`, `DELETE`, or `KEEP` decisions.
+  Edits are first applied to a trajectory-private overlay and evaluated on the
+  same task in later attempts, leaving the global Skill Bank unchanged during
+  verification.
+- GiGPO combines episode-level and step-level relative advantages. The
+  Reasoning Agent uses environment returns, while the Skill Agent receives the
+  improvement of edited attempts over the baseline as a sparse reward. The two
+  batches are then interleaved for one shared PPO actor update.
+- Validated edits are promoted as new, lineage-tracked task bundles. Utility
+  statistics, optional UCB ranking, and frequency/recency eviction manage the
+  Skill Bank over the course of training.
+
+## 5. Repository Structure
+
+| Path | Purpose |
+| --- | --- |
+| [`agent_system/memory`](agent_system/memory) | Hierarchical Skill Bank, embedding retrieval, overlays, and lifecycle management |
+| [`agent_system/multi_turn_rollout`](agent_system/multi_turn_rollout) | Environment interaction, Skill Agent editing, and multi-attempt rollout collection |
+| [`gigpo`](gigpo) | GiGPO step-return and advantage computation |
+| [`verl/trainer/ppo`](verl/trainer/ppo) | VERL PPO trainer integration and joint actor updates |
+| [`examples_coskill`](examples_coskill) | Training launchers and the FastAPI skill-retrieval service |
+| [`initial_skill_bank`](initial_skill_bank) | Offline ALFWorld/WebShop skill-bank generation pipelines |
+
+## 6. Configuration Notes
+
+- Keep `actor_rollout_ref.rollout.n=1`; rollout grouping is controlled by
+  `env.rollout.n` in the environment manager.
+- Meta-attempt training requires embedding retrieval, `task_step` mode,
+  `top_k_task=1`, a local embedding model for private overlays, and at least
+  two attempts.
+- Validation reuses the current training Skill Bank and always evaluates with
+  skills enabled. Promotion, eviction, and retrieval snapshots are persisted
+  under the configured trainer output directory for audit and resume.
